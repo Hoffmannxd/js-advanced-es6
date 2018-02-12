@@ -58,7 +58,22 @@
         <tfoot>
         </tfoot>
     </table>
-    <script src="js/index.js"></script>
+    <script src="js/app/models/Negotiation.js"></script>
+    <script>
+        //js doesn't allow block scope, if you define a index inside a for, this index can be accessed outside from the definition scope
+        // use LET to ensure scope block, avoid variables flowing outside it's definition
+
+
+        var neg1 = new Negotiation(new Date(),10,0.1);
+        //to ensure the negotiation can't be altered once it's done
+        //so now isn't possible change atribute acessing via "._"
+        //for ex: neg1._quantidade = <arbitrary-value>
+        //to verify fronze use isFronzen method that returns bool
+        //Object.freeze(neg1);
+        var volumeSpec = neg1.volume;
+        console.log(volumeSpec)
+
+    </script>
     
 </body>
 </html>
