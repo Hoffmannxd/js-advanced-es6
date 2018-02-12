@@ -8,6 +8,8 @@ class ControllerNegotiation {
 		this._inputQuantidade = $('#quantidade');
 		this._inputValor = $('#valor');
 
+		this._negotiationList = new ListOfNegotiations();
+
 	}
 
 	insert(event){
@@ -37,7 +39,11 @@ class ControllerNegotiation {
 		//indice % 2 operation just decrement when indice equals 1, to avoid using if and letting less verbose
 		//arrow function: .map(function(x,y){}) == .map((x,y) => {})
 
-		let date = new Date(...this._inputData.value.split('-').map((item, indice) => item - indice % 2));
+		//let date = new Date(...this._inputData.value.split('-').map((item, indice) => item - indice % 2));
+
+		//let helper = new DateHelper();
+
+		let date = DateHelper.stringToDate(this._inputData.value);
 
 		let negotiationCall = new Negotiation(
 		date,
@@ -47,16 +53,26 @@ class ControllerNegotiation {
 
 		console.log(negotiationCall);
 
-		//this.clearForm();
+		let ddmmyyyy = DateHelper.dateToString(negotiationCall.data);
+
+		console.log(ddmmyyyy);
+
+		this._negotiationList.addNegotiation(negotiationCall);
+
+		console.log(this._negotiationList);
+
+		this._clearForm();
 
 		//console.log(this.inputData.value);
 		//console.log(this.Quantidade.value);
 		//console.log(this.inputValor.value);
 	}
 
-	clearForm(){
-		this._inputQuantidade = 0;
-		this._inputValor = 0.0;
+	//this method is used just by the self class
+	_clearForm(){
+		this._inputData.value = '';
+		this._inputQuantidade.value = 0;
+		this._inputValor.value = 0.0;
 	
 		this._inputData.focus();
 	};
