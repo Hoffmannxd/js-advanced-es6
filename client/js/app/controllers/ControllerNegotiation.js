@@ -9,7 +9,10 @@ class ControllerNegotiation {
 		this._inputValor = $('#valor');
 
 		this._negotiationList = new ListOfNegotiations();
+		//id in DOM to render properly in the div
+		this._negotiationView = new NegotiationView($('#negotiationView'));
 
+		this._negotiationView.update(this._negotiationList);
 	}
 
 	insert(event){
@@ -43,29 +46,20 @@ class ControllerNegotiation {
 
 		//let helper = new DateHelper();
 
-		let date = DateHelper.stringToDate(this._inputData.value);
+		this._negotiationList.addNegotiation(this._buildNegotiation());
+		this._negotiationView.update(this._negotiationList);
+		console.log(this._negotiationList);
 
-		let negotiationCall = new Negotiation(
-		date,
+		this._clearForm();
+	}
+
+	_buildNegotiation(){
+		return new Negotiation(
+		DateHelper.stringToDate(this._inputData.value),
 		this._inputQuantidade.value,
 		this._inputValor.value
 		);
 
-		console.log(negotiationCall);
-
-		let ddmmyyyy = DateHelper.dateToString(negotiationCall.data);
-
-		console.log(ddmmyyyy);
-
-		this._negotiationList.addNegotiation(negotiationCall);
-
-		console.log(this._negotiationList);
-
-		this._clearForm();
-
-		//console.log(this.inputData.value);
-		//console.log(this.Quantidade.value);
-		//console.log(this.inputValor.value);
 	}
 
 	//this method is used just by the self class
