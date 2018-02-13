@@ -11,8 +11,14 @@ class ControllerNegotiation {
 		this._negotiationList = new ListOfNegotiations();
 		//id in DOM to render properly in the div
 		this._negotiationView = new NegotiationView($('#negotiationView'));
-
 		this._negotiationView.update(this._negotiationList);
+
+		this._message = new Messages();
+
+		this._messageView = new MessageView($('#messageView'));
+		this._messageView.update(this._message);
+
+
 	}
 
 	insert(event){
@@ -47,6 +53,8 @@ class ControllerNegotiation {
 		//let helper = new DateHelper();
 
 		this._negotiationList.addNegotiation(this._buildNegotiation());
+		this._message.text = 'Message added with success!'
+		this._messageView.update(this._message);
 		this._negotiationView.update(this._negotiationList);
 		console.log(this._negotiationList);
 

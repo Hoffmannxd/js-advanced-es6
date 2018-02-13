@@ -1,10 +1,9 @@
-class NegotiationView {
-
-    constructor(elementId){
-        this._element = elementId;
+class NegotiationView extends View{
+    constructor(element) {
+        super(element);
     }
 
-    _template(model){
+    template(model){
         return `
                 <table class="table table-hover table-bordered">
                     <thead>
@@ -40,12 +39,6 @@ class NegotiationView {
                 </table>
                     `;
             }
-
-    update(model){
-        //convert template into DOM element
-        this._element.innerHTML = this._template(model);
-    }
-
 
 }
 
