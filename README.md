@@ -1,9 +1,9 @@
 # JavaScript Avançado [Alura]
 
 # Engenheiro JavaScript
-I - Done
-II - ?
-III - ?
+- I - Done
+- II - ?
+- III - ?
 
 ## TODO
 - Fix Message View 
